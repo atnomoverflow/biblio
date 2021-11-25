@@ -47,4 +47,21 @@ class LivreRepository extends ServiceEntityRepository
         ;
     }
     */
+    /**
+     * Repository method for finding the newest inserted
+     * entry inside the database. Will return the latest
+     * entry when one is existent, otherwise will return
+     * null.
+     *
+     * @return Livre[]|null
+     */
+    public function findLastInserted()
+    {
+        return $this
+            ->createQueryBuilder("L")
+            ->orderBy("L.id", "DESC")
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult();
+    }
 }

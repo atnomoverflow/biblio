@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 /**
  * @ORM\Entity(repositoryClass=LivreRepository::class)
  *@Vich\Uploadable
@@ -71,6 +72,10 @@ class Livre
      * @ORM\Column(type="string", length=255)
      */
     private $image;
+    /**
+     * @ORM\Column(type="text", length=65535)
+     */
+    private $resume;
     /**
      * @Vich\UploadableField(mapping="product_images", fileNameProperty="image")
      * @var File
@@ -151,7 +156,17 @@ class Livre
 
         return $this;
     }
+    public function getResume(): ?string
+    {
+        return $this->resume;
+    }
 
+    public function setResume(string $resume): self
+    {
+        $this->resume = $resume;
+
+        return $this;
+    }
     public function getDateEdition(): ?\DateTimeInterface
     {
         return $this->date_edition;
@@ -226,8 +241,8 @@ class Livre
 
         return $this;
     }
-    
-    public function setImageFile(File $image = null):self
+
+    public function setImageFile(File $image = null): self
     {
         $this->imageFile = $image;
 
@@ -244,5 +259,9 @@ class Livre
     public function getImageFile(): ?File
     {
         return $this->imageFile;
+    }
+    public function __toString()
+    {
+        return $this->titre;
     }
 }

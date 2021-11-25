@@ -33,6 +33,7 @@ class LivreCrudController extends AbstractCrudController
             NumberField::new('nb_exemplaires', "nombre de exemplaire"),
             MoneyField::new('prix')->setCurrency('TND'),
             AssociationField::new('auteurs'),
+            TextareaField::new('resume'),
             TextareaField::new('imageFile')
                 ->setFormType(VichImageType::class)
                 ->hideOnIndex()
