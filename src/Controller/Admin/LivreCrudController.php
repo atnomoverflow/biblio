@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
@@ -24,7 +25,7 @@ class LivreCrudController extends AbstractCrudController
     {
         return [
             TextField::new('titre'),
-            ImageField::new('photo_de_couverture', "image")
+            ImageField::new('image')
                 ->setBasePath($this->getParameter("app.path.product_images"))
                 ->onlyOnIndex(),
             TextField::new('isbn', "ISBN"),
@@ -32,7 +33,7 @@ class LivreCrudController extends AbstractCrudController
             NumberField::new('nb_exemplaires', "nombre de exemplaire"),
             MoneyField::new('prix')->setCurrency('TND'),
             AssociationField::new('auteurs'),
-            Field::new('imageFile', "image")
+            TextareaField::new('imageFile')
                 ->setFormType(VichImageType::class)
                 ->hideOnIndex()
                 ->setFormTypeOption("allow_delete", false),

@@ -70,9 +70,9 @@ class Livre
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $photo_de_couverture;
+    private $image;
     /**
-     * @Vich\UploadableField(mapping="product_images", fileNameProperty="photo_de_couverture")
+     * @Vich\UploadableField(mapping="product_images", fileNameProperty="image")
      * @var File
      */
     private $imageFile;
@@ -215,18 +215,19 @@ class Livre
         return $this;
     }
 
-    public function getPhotoDeCouverture(): ?string
+    public function getImage(): ?string
     {
-        return $this->photo_de_couverture;
+        return $this->image;
     }
 
-    public function setPhotoDeCouverture(string $photo_de_couverture): self
+    public function setImage($image): self
     {
-        $this->photo_de_couverture = $photo_de_couverture;
+        $this->image = $image;
 
         return $this;
     }
-    public function setImageFile($image = null)
+    
+    public function setImageFile(File $image = null):self
     {
         $this->imageFile = $image;
 
@@ -240,7 +241,7 @@ class Livre
         return $this;
     }
 
-    public function getImageFile()
+    public function getImageFile(): ?File
     {
         return $this->imageFile;
     }
