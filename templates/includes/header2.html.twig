@@ -1,0 +1,62 @@
+<header class="item header margin-top-0">
+	<div class="wrapper">
+		<nav role="navigation" class="navbar navbar-white navbar-embossed navbar-lg navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button data-target="#navbar-collapse-02" data-toggle="collapse" class="navbar-toggle" type="button">
+						<i class="fa fa-bars"></i>
+						<span class="sr-only">Toggle navigation</span>
+					</button>
+					<a href="index.html" class="navbar-brand brand">
+						SCORILO
+					</a>
+				</div>
+				<div id="navbar-collapse-02" class="collapse navbar-collapse" style="display: flex; flex: auto;">
+					<ul class="nav navbar-nav navbar-right" style="flex-direction: row;">
+						<li class="propClone">
+							<a href="{{ path('home') }}">Home</a>
+						</li>
+						<li class="propClone">
+							<a href="shop.html">Shop</a>
+						</li>
+						<li class="propClone">
+							<a href="product.html">Product</a>
+						</li>
+						<li class="propClone">
+							<a href="checkout.html">Checkout</a>
+						</li>
+						<li class="propClone">
+							<a href="contact.html">Contact</a>
+						</li>
+						{% if not(app.user) %}
+							<li class="propClone">
+								<a href="{{path('app_register')}}">register</a>
+							</li>
+							<li class="propClone">
+								<a href="{{path('app_login')}}">login</a>
+							</li>
+						{% else %}
+							<li class="propClone">
+								<a href="{{path('app_logout')}}">logout</a>
+							</li>
+						{% endif %}
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<div class="text-homeimage">
+						<div class="maintext-image" data-scrollreveal="enter top over 1.5s after 0.1s">
+							Increase Digital Sales
+						</div>
+						<div class="subtext-image" data-scrollreveal="enter bottom over 1.7s after 0.3s">
+							Boost revenue with Scorilo
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>

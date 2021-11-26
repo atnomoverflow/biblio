@@ -29,7 +29,7 @@ class LibrairyController extends AbstractController
             // Define the page parameter
             $request->query->getInt('page', 1),
             // Items per page
-            6
+            12
         );
 
         return $this->render('librairy/index.html.twig', [
