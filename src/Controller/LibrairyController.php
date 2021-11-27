@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Filter;
 use App\Entity\Livre;
+use App\Form\FilterType;
+use App\Repository\LivreRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,27 +17,20 @@ class LibrairyController extends AbstractController
     /**
      * @Route("/librairy", name="librairy")
      */
-    public function index(Request $request, PaginatorInterface $paginator): Response
+    public function index(LivreRepository $repository, Request $request): Response
     {
-        $bookRepo = $this->getDoctrine()->getRepository(Livre::class);
-
-        // Find all the data on the Appointments table, filter your query as you need
-        $allBooksQuery = $bookRepo->createQueryBuilder('L')
-            ->getQuery();
-
-        // Paginate the results of the query
-        $allBooks = $paginator->paginate(
-            // Doctrine Query, not results
-            $allBooksQuery,
-            // Define the page parameter
-            $request->query->getInt('page', 1),
-            // Items per page
-            12
-        );
-
+        $data = new Filter();
+        $data->page = $request->get('page', 1);
+        $form = $this->createForm(FilterType::class, $data);
+        $form->handleRequest($request);
+        [$min, $max] = $repository->findMinMax();
+        $allBooks = $repository->findSearch($data, true);
         return $this->render('librairy/index.html.twig', [
             'controller_name' => 'LibrairyController',
-            'books'=>$allBooks
+            'books' => $allBooks,
+            'form' => $form->createView(),
+            'min' => $min,
+            'max' => $max,
         ]);
     }
 }

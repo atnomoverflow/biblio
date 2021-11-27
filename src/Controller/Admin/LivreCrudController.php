@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Livre;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
@@ -28,11 +29,15 @@ class LivreCrudController extends AbstractCrudController
             ImageField::new('image')
                 ->setBasePath($this->getParameter("app.path.product_images"))
                 ->onlyOnIndex(),
+            CollectionField::new('auteurs')->onlyOnIndex(),
             TextField::new('isbn', "ISBN"),
             NumberField::new('nb_pages', "nombre de page"),
             NumberField::new('nb_exemplaires', "nombre de exemplaire"),
             MoneyField::new('prix')->setCurrency('TND'),
-            AssociationField::new('auteurs'),
+            AssociationField::new('auteurs')->setFormTypeOptions([
+                'by_reference' => false,
+            ])->autocomplete()
+            ->hideOnIndex(),
             TextareaField::new('resume'),
             TextareaField::new('imageFile')
                 ->setFormType(VichImageType::class)
