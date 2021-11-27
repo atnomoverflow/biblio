@@ -1,0 +1,90 @@
+{% extends 'librairy/detail_base.html.twig'  %}
+{% block title %}
+	livre detail
+{% endblock %}
+{% block body %}
+	<section class="item content">
+		<div class="container toparea">
+			<div class="underlined-title">
+				<div class="editContent">
+					<h1 class="text-center latestitems">Awesome Product</h1>
+				</div>
+				<div class="wow-hr type_short">
+					<span class="wow-hr-h">
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+					</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-8">
+					<div class="productbox">
+						<img src="{{asset("uploads/images/" ~ book.image)}}" alt="">
+						<div class="clearfix"></div>
+						<br/>
+						<div class="product-details text-left">
+							<p>
+								{{book.resume}}
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<a href="#" class="btn btn-buynow">order</a>
+					<div class="properties-box">
+						<ul class="unstyle">
+							<li>
+								<b class="propertyname">titre:</b>
+								{{book.titre}}</li>
+							<li>
+								<b class="propertyname">nombre d"exmplaire:</b>
+								{{book.getNbExemplaires()}}</li>
+							<li>
+								<b class="propertyname">isbn:</b>
+								{{book.isbn}}</li>
+							<li>
+								<b class="propertyname">nombre de pages:</b>
+								{{book.getNbPages}}</li>
+							<li>
+								<b class="propertyname">date d'edition:</b>
+								{{book.getDateEdition|date("m/d/Y")}}</li>
+							<li>
+								<b class="propertyname">editeur:</b>
+								{{book.editeur}}</li>
+							<li>
+								<b class="propertyname">auteur(s):</b>
+								{% for auteur in book.auteurs %}
+									{{auteur.nom}}
+									{{auteur.prenom}}
+									{% if loop.index != loop.length%},
+									{% endif %}
+								{% endfor %}
+							</li>
+							<li>
+								<b class="propertyname">categorie:</b>
+								{{book.categorie}}</li>
+							<li>
+								<b class="propertyname">resume:</b>
+								{{book.resume}}</li>
+
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}
+{% block extra_javascripts %}
+	<script>
+		// ----HOVER CAPTION---//
+jQuery(document).ready(function ($) {
+$('.fadeshop').hover(function () {
+$(this).find('.captionshop').fadeIn(150);
+}, function () {
+$(this).find('.captionshop').fadeOut(150);
+});
+});
+	</script>
+{% endblock %}

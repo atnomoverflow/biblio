@@ -1,79 +1,61 @@
 {% extends 'librairy/librairyBase.html.twig' %}
 
-{% block title %}Hello LibrairyController!
+{% block title %}Librairy
 {% endblock %}
-
 {% block body %}
-	
-
-		<div class="site-section"> <div class="container">
-
+	<div class="site-section">
+		<div class="container">
 			<div class="row mb-5">
 				<div class="col-md-9 order-2">
 					<div class="row mb-5">
 						{% for book in books %}
-
 							<div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
 								<div class="block-4 text-center border">
 									<figure class="block-4-image">
-										<a href="shop-single.html"><img src="{{asset("uploads/images/" ~ book.image)}}" style="height: 179.562px; width: 252.984px;" alt=" image placeholder" class=" img-fluid"></a>
+										<a href="{{ path('livreDetail',{'id':book.id}) }}"><img src="{{asset("uploads/images/" ~ book.image)}}" style="height: 179.562px; width: 252.984px;" alt=" image placeholder" class=" img-fluid"></a>
 									</figure>
 									<div class="block-4-text p-4">
 										<h3>
-											<a href="shop-single.html">{{book.titre}}</a>
+											<a href="{{ path('livreDetail',{'id':book.id}) }}">{{book.titre}}</a>
 										</h3>
 										<p class="mb-0">{{book.resume}}</p>
 										<p class="text-primary font-weight-bold">{{ (book.prix)|number_format(2, '.', ',') }}TND</p>
 									</div>
 								</div>
 							</div>
-
 						{% endfor %}
 					</div>
-					<div class="row" >
+					<div class="row">
 						{{ knp_pagination_render(books,'@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig') }}
 					</div>
 				</div>
-
 				<div class="col-md-3 order-1 mb-5 mb-md-0">
-
-
 					<div class="border p-4 rounded mb-4">
 						{{ form_start(form, {attr: {class: 'filter js-filter-form'}}) }}
-
 						<div class="spinner-border js-loading" role="status" aria-hidden="true" style="display: none">
 							<span class="sr-only">Loading...</span>
 						</div>
-
-						{{ form_row(form.q) }}
-
+						<h4>Search</h4>
+						<div class="mb-4">
+							{{ form_row(form.q,{'attr':{'class':'search'}}) }}
+						</div>
 						<h3 class="mb-3 h6 text-uppercase text-black d-block">Catégories</h4>
 						{% for cat in form.categories %}
 							<div class="d-flex">
 								{{form_widget(cat,{'attr':{'class':'mr-2 mt-1'}})}}
 								{{form_label(cat,null, {'label_attr': {'class': 'text-black'}})}}
 							</div>
-							{# <label for="{{cat.vars.id}}" class="d-flex">
-																											<input type="checkbox" id="{{cat.vars.id}}" name="{{cat.vars.full_name}}" value="{{cat.vars.name}}" class="mr-2 mt-1" checked="checked">
-																											<span class="text-black">{{cat.vars.label}}</span> 
-																											</label> #}
 						{% endfor %}
-						{# {{ form_row(form.categories) }}  #}
-
 						<h4>Prix</h4>
 						<div class="mb-4">
 							<h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Price</h3>
 							{{ form_row(form.min) }}
 							{{ form_row(form.max) }}
-
 							<div id="slider-range" class="border-primary"></div>
 							<input type="text" name="text" id="amount" class="form-control border-0 pl-0 bg-white" disabled=""/>
 						</div>
-
 						<button type="submit" class="btn btn-primary w-100">Filtrer</button>
-
 						{{ form_end(form) }}
-
 						<input id="minPrix" value="{{min}}" type="hidden"/>
 						<input id="maxPrix" value="{{max}}" type="hidden"/>
 					</div>
@@ -83,16 +65,4 @@
 
 		</div>
 	</div>
-{% endblock %}
-{% block extra_javascripts %}
-	<script>
-		// ----HOVER CAPTION---//
-jQuery(document).ready(function ($) {
-$('.fadeshop').hover(function () {
-$(this).find('.captionshop').fadeIn(150);
-}, function () {
-$(this).find('.captionshop').fadeOut(150);
-});
-});
-	</script>
 {% endblock %}

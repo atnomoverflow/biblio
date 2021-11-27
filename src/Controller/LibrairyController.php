@@ -6,7 +6,6 @@ use App\Entity\Filter;
 use App\Entity\Livre;
 use App\Form\FilterType;
 use App\Repository\LivreRepository;
-use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,6 +30,16 @@ class LibrairyController extends AbstractController
             'form' => $form->createView(),
             'min' => $min,
             'max' => $max,
+        ]);
+    }
+    /**
+     * @Route("/librairy/{id}", name="livreDetail")
+     */
+    public function livreDetail(Request $request, Livre $livre): Response
+    {
+        return $this->render('librairy/detail.html.twig', [
+            'controller_name' => 'LibrairyController',
+            'book' => $livre
         ]);
     }
 }

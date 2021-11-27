@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="generator" content="">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		{# Run `composer require symfony/webpack-encore-bundle`
+								           and uncomment the following Encore helpers to start using Symfony UX #}
+		{% block stylesheets %}
+
+			<link href="{{asset("assets/css/bootstrap.min.css")}}" rel="stylesheet">
+			<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+			<link href="{{asset("assets/css/style.css")}}" rel="stylesheet">
+			<link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700" rel="stylesheet">
+			<link href="https://fonts.googleapis.com/css?family=Roboto:200,300,400,500,600,700" rel="stylesheet">
+		{% endblock %}
+
+		{% block extra_stylesheets %}{% endblock %}
+	</head>
+	<body style="min-height: 100vh; display: flex; flex-direction: column;">
+		{% include "includes/header_detail.html.twig"  with {'BookName': book.titre} %}
+		{% block body %}{% endblock %}
+		{% include "includes/footer.html.twig" %}
+		{% block javascripts %}
+			<script src="{{asset("assets/js/jquery-.js")}}"></script>
+			<script src="{{asset("assets/js/bootstrap.min.js")}}"></script>
+			<script src="{{asset("assets/js/anim.js")}}"></script>
+		{% endblock %}
+		{% block extra_javascripts %}{% endblock %}
+	</body>
+</html>
