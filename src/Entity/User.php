@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -46,6 +48,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
+
+    /**
+     * @ORM\OneToMany(targetEntity=EmprintLivre::class, mappedBy="user")
+     */
+    private $emprints;
+
+    public function __construct()
+    {
+        $this->emprints = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -153,5 +165,60 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->isVerified = $isVerified;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|EmprintLivre[]
+     */
+    public function getEmprints(): Collection
+    {
+        return $this->emprints;
+    }
+
+    public function addEmprint(EmprintLivre $emprint): self
+    {
+        if (!$this->emprints->contains($emprint)) {
+            $this->emprints[] = $emprint;
+            $emprint->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEmprint(EmprintLivre $emprint): self
+    {
+        if ($this->emprints->removeElement($emprint)) {
+            // set the owning side to null (unless already changed)
+            if ($emprint->getUser() === $this) {
+                $emprint->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+    public function haveMoreThanThreeBooks()
+    {
+        $count = 0;
+        foreach ($this->emprints as $emprint) {
+            if ($emprint->getState() == "Non Remis") {
+                $count++;
+            }
+            if ($count >=3 ) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public function getAllOwnedBooks(){
+        $livres=[];
+        foreach ($this->emprints as $emprint) {
+
+            $livres=array_merge($livres,$emprint->getLivres()->toArray());
+        }
+        return $livres;
+    }
+    public function __toString()
+    {
+        return $this->username;
     }
 }

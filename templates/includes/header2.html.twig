@@ -19,14 +19,13 @@
 						<li class="propClone">
 							<a href="{{ path('librairy') }}">Librairy</a>
 						</li>
-						
+
 						<li class="propClone">
-							<a href="checkout.html">Checkout</a>
+							<a href="{{ path('check_out') }}">Checkout</a>
 						</li>
-						<li class="propClone">
-							<a href="contact.html">Contact</a>
-						</li>
+
 						{% if not(app.user) %}
+							
 							<li class="propClone">
 								<a href="{{path('app_register')}}">register</a>
 							</li>
@@ -34,6 +33,9 @@
 								<a href="{{path('app_login')}}">login</a>
 							</li>
 						{% else %}
+						<li class="propClone">
+								<a href="{{path('history')}}">History</a>
+							</li>
 							<li class="propClone">
 								<a href="{{path('app_logout')}}">logout</a>
 							</li>

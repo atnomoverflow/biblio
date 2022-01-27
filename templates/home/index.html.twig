@@ -44,12 +44,12 @@
 								</p>
 							</div>
 							<span class="maxproduct"><img style="
-								    height: 188.688px;
-								    width: 321.984px;
-								" src="{{asset("uploads/images/" ~ book.image)}}" alt=""></span>
+																    height: 188.688px;
+																    width: 321.984px;
+																" src="{{asset("uploads/images/" ~ book.image)}}" alt=""></span>
 						</div>
 						<div class="product-details">
-							<a href="#">
+							<a href="{{ path('livreDetail',{'id':book.id}) }}">
 								<h1>{{book.titre}}</h1>
 							</a>
 							<span class="price">

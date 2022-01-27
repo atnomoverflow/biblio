@@ -12,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
@@ -38,7 +39,7 @@ class LivreCrudController extends AbstractCrudController
                 'by_reference' => false,
             ])->autocomplete()
             ->hideOnIndex(),
-            TextareaField::new('resume'),
+            TextEditorField::new('resume'),
             TextareaField::new('imageFile')
                 ->setFormType(VichImageType::class)
                 ->hideOnIndex()

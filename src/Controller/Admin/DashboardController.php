@@ -5,7 +5,10 @@ namespace App\Controller\Admin;
 use App\Entity\Auteur;
 use App\Entity\Categorie;
 use App\Entity\Editeur;
+use App\Entity\EmprintLivre;
 use App\Entity\Livre;
+
+
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -38,6 +41,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Livres', "fa fa-book", Livre::class);
         yield MenuItem::linkToCrud('Categorie', "fa fa-archive", Categorie::class);
         yield MenuItem::linkToCrud('Editeur', "fa fa-bus", Editeur::class);
+        yield MenuItem::linkToCrud('Emprint', "fa fa-bus", EmprintLivre::class);
+        
 
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }

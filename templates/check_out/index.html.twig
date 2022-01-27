@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CheckOutController!
+{% endblock %}
+
+{% block body %}
+	<section class="item content">
+		<div class="container toparea">
+			<div class="underlined-title">
+				<div class="editContent">
+					<h1 class="text-center latestitems">MAKE PAYMENT</h1>
+				</div>
+				<div class="wow-hr type_short">
+					<span class="wow-hr-h">
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+					</span>
+				</div>
+			</div>
+			<div id="edd_checkout_wrap" class="col-md-8 col-md-offset-2">
+				<div id="edd_checkout_cart_wrap">
+					<table id="edd_checkout_cart" class="ajaxed">
+						<thead>
+							<tr class="edd_cart_header_row">
+								<th class="edd_cart_item_name">
+									Item Name
+								</th>
+								<th class="edd_cart_item_price">
+									Item Price
+								</th>
+								<th class="edd_cart_actions">
+									Actions
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for  livre in livres %}
+								<tr class="edd_cart_item" id="edd_cart_item_0_25" data-download-id="25">
+									<td class="edd_cart_item_name">
+										<div class="edd_cart_item_image">
+											<img width="25" height="25" src="{{asset("uploads/images/" ~ livre.livre.image)}}" alt="">
+										</div>
+										<span class="edd_checkout_cart_item_title">{{livre.livre.titre }}</span>
+									</td>
+									<td class="edd_cart_item_price">
+										{{ (livre.livre.prix)|number_format(2, '.', ',') }}TND
+									</td>
+									<td class="edd_cart_actions">
+										<a class="edd_cart_remove_item_btn" href="{{ path('remove',{'id':livre.livre.id}) }}">Remove</a>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</tbody>
+				</table>
+			</div>
+			<div id="edd_checkout_form_wrap" class="edd_clearfix">
+				<form id="edd_purchase_form" class="edd_form" action="{{ path('emprint') }}" method="POST">
+					<fieldset id="edd_purchase_submit">
+						{% if livres is not empty %}
+							<input type="submit" class="edd-submit button" id="edd-purchase-button" name="edd-purchase" value="Demande de Emprint">
+						{% else %}
+
+							<input name="edd-purchase" value="Demande de Emprint" disabled>
+
+						{% endif %}
+						{% if errorMessage %}
+							<div class="alert alert-danger" role="alert">
+								you have more than three books not returned
+							</div>
+						{% endif %}
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>{% endblock %}

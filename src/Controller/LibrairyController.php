@@ -6,7 +6,10 @@ use App\Entity\Filter;
 use App\Entity\Livre;
 use App\Form\FilterType;
 use App\Repository\LivreRepository;
+use App\Service\Cart\CartService;
+use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,5 +44,14 @@ class LibrairyController extends AbstractController
             'controller_name' => 'LibrairyController',
             'book' => $livre
         ]);
+    }
+    /**
+     * @Route("/order/{id}", name="order")
+     */
+    public function order(Request $request, Livre $livre, CartService $cart): RedirectResponse
+    {
+        $cart->add($livre->getId());
+        return $this->redirectToRoute('livreDetail',["id"=>$livre->getId()]);
+
     }
 }

@@ -31,7 +31,7 @@
 					</div>
 				</div>
 				<div class="col-md-4">
-					<a href="#" class="btn btn-buynow">order</a>
+					<a href="{{ path('order',{'id':book.id}) }}" class="btn btn-buynow">order</a>
 					<div class="properties-box">
 						<ul class="unstyle">
 							<li>
@@ -64,10 +64,7 @@
 							<li>
 								<b class="propertyname">categorie:</b>
 								{{book.categorie}}</li>
-							<li>
-								<b class="propertyname">resume:</b>
-								{{book.resume}}</li>
-
+							
 						</ul>
 					</div>
 				</div>

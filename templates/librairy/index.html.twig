@@ -18,7 +18,12 @@
 										<h3>
 											<a href="{{ path('livreDetail',{'id':book.id}) }}">{{book.titre}}</a>
 										</h3>
-										<p class="mb-0">{{book.resume}}</p>
+										<p class="mb-0" style="line-height: 1.5em;
+											    height: 3em;
+											    overflow: hidden;
+											    white-space: nowrap;
+											    text-overflow: ellipsis;
+											    width: 100%;">{{book.resume}}</p>
 										<p class="text-primary font-weight-bold">{{ (book.prix)|number_format(2, '.', ',') }}TND</p>
 									</div>
 								</div>

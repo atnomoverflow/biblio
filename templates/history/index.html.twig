@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HistoryController!
+{% endblock %}
+
+{% block body %}
+	<section class="item content">
+		<div class="container toparea">
+			<div class="underlined-title">
+				<div class="editContent">
+					<h1 class="text-center latestitems">History</h1>
+				</div>
+				<div class="wow-hr type_short">
+					<span class="wow-hr-h">
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+					</span>
+				</div>
+			</div>
+			<div id="edd_checkout_wrap" class="col-md-8 col-md-offset-2">
+				<div id="edd_checkout_cart_wrap">
+					<table id="edd_checkout_cart" class="ajaxed">
+						<thead>
+							<tr class="edd_cart_header_row">
+								<th class="edd_cart_item_name">
+									Item Name
+								</th>
+								<th class="edd_cart_item_price">
+									status
+								</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+							{% for  emprint in emprints %}
+							
+									<tr class="edd_cart_item" id="edd_cart_item_0_25" data-download-id="25">
+										<td class="edd_cart_item_name">
+											<div class="edd_cart_item_image">
+												<img width="25" height="25" src="{{asset("uploads/images/" ~ emprint.livre.image)}}" alt="">
+											</div>
+											<span class="edd_checkout_cart_item_title">{{emprint.livre.titre }}</span>
+										</td>
+										<td class="edd_cart_item_price">
+											{{emprint.state}}
+										</td>
+									
+									</tr>
+								
+							{% endfor %}
+						</tbody>
+					</tbody>
+				</table>
+			</div>
+			
+		</div>
+	</div>
+</section>{% endblock %}
